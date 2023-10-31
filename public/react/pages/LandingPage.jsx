@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 const LandingPage = () => {
     const navigate = useNavigate();
     return (
-        <>
         <main>
         <div className="blob"></div>
             <nav>
@@ -26,8 +25,6 @@ const LandingPage = () => {
                 </section>
             </section>
         </main>
-        
-        </>
     )
 };
 
