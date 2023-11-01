@@ -55,13 +55,16 @@ router.post("/login", async (req, res, next) => {
 });
 
 router.post("/register", async (req, res, next) => {
+  if (Object.values(req.body).includes("")) {
+    return res.status(400).send("Inputs cannot be empty.");
+  }
   try {
     const user = await User.create({
       name: req.body.name,
       email: req.body.email,
       password: req.body.password,
     });
-    res.send(user);
+    return res.send(user);
   } catch (error) {
     next(error);
   }
