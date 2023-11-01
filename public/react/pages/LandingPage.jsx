@@ -4,8 +4,9 @@ import { useNavigate } from "react-router-dom";
 const LandingPage = () => {
     const navigate = useNavigate();
     return (
+        
         <main>
-        <div className="blob"></div>
+            <div className="blob"></div>
             <nav>
                 <h2>Wikiverse</h2>
                 <section className="nav-buttons">
@@ -25,6 +26,7 @@ const LandingPage = () => {
                 </section>
             </section>
         </main>
+        
     )
 };
 
