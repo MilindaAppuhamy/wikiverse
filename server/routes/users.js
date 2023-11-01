@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const { Page, User } = require("../models");
 
+router.use(express.json());
+
 // GET /users
 router.get("/", async (req, res, next) => {
   try {
@@ -52,10 +54,10 @@ router.post("/login", async (req, res, next) => {
   }
 });
 
-router.post("/login", async (req, res, next) => {
+router.post("/register", async (req, res, next) => {
   try {
     const user = await User.create({
-      username: req.body.username,
+      name: req.body.name,
       email: req.body.email,
       password: req.body.password,
     });
