@@ -8,7 +8,7 @@ function Toast(props) {
       style={{
         position: "absolute",
         top: "-110px",
-        backgroundColor: status === "error" ? "#ee3939" : "#00bf50",
+        backgroundColor: status === "error" ? "#ee3939" : "#00aa30",
         width: "300px",
         borderRadius: "10px",
         display: "flex",
