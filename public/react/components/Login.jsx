@@ -1,6 +1,7 @@
 import React from "react";
 
-const Login = () => {
+const Login = (props) => {
+    const {setIsLogin} = props;
     return (
         <>
             <h2>Login</h2>
@@ -23,7 +24,7 @@ const Login = () => {
             <button className="login" type="submit">Login</button>
             <div className="back-to-register">
                 <p>New to Wikiverse.</p>
-                <a>Register</a>
+                <a onClick={() => setIsLogin(false)}>Register</a>
             </div>
         </>
     );

@@ -202,7 +202,7 @@ nav > .nav-buttons > .login-button:hover {
 }
 
 /* This is a check */
-.flip-card:hover {
+.flip-card.login {
   transform: rotateY(180deg);
 }
 .authentication-page .flip-card .flip-card-back {

@@ -1,6 +1,7 @@
 import React from "react";
 
-const Register = () => {
+const Register = (props) => {
+    const {setIsLogin} = props;
     return (
         <>
             <h2>Register</h2>
@@ -32,7 +33,7 @@ const Register = () => {
             <button className="register" type="submit">Register</button>
             <div className="back-to-login">
                 <p>Already with us.</p>
-                <a>Login</a>
+                <a onClick={() => setIsLogin(true)}>Login</a>
             </div>
         </>
     );
