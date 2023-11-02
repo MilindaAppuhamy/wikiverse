@@ -33,6 +33,9 @@ router.get("/:userId", async (req, res, next) => {
 });
 
 router.post("/login", async (req, res, next) => {
+  if (Object.values(req.body).includes("")) {
+    return res.status(400).send("Inputs cannot be empty.");
+  }
   try {
     const user = await User.findOne({
       where: {
@@ -40,13 +43,12 @@ router.post("/login", async (req, res, next) => {
       },
     });
     if (!user) {
-      res.status(404).send("Invalid user");
-      next();
+      return res.status(404).send("Invalid user");
     } else {
       if (user.password === req.body.password) {
-        res.send(user);
+        return res.send(user);
       } else {
-        res.send("Incorrect password");
+        return res.status(400).send("Incorrect password");
       }
     }
   } catch (error) {
