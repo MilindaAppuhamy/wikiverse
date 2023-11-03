@@ -32,36 +32,7 @@ main {
   }
 }
 
-.toast {
-  animation: toast 3s;
-}
-
-@keyframes toast {
-  0% {
-    opacity: 0;
-    display: none;
-  }
-  1% {
-    opacity: 1;
-    transform: scale(1);
-    display: flex;
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.05);
-    display: flex;
-  }
-  80% {
-    opacity: 0;
-    display: flex;
-  }
-  100% {
-    opacity: 0;
-    display: none;
-  }
-}
-
-nav {
+.navbar {
   display: flex;
   z-index: 2;
   align-items: center;
@@ -75,7 +46,7 @@ nav {
   box-shadow: 3px 3px 8px #787878;
 }
 
-nav > h2 {
+.navbar > h2 {
   color: #f6f6f6;
   font-weight: bold;
   font-family: sans-serif;
@@ -83,7 +54,7 @@ nav > h2 {
   font-size: 34px;
 }
 
-nav > .nav-buttons {
+.navbar > .nav-buttons {
   width: 25%;
   display: flex;
   align-items: center;
@@ -91,7 +62,7 @@ nav > .nav-buttons {
   background-color: transparent;
 }
 
-nav > .nav-buttons > .register-button {
+.navbar > .nav-buttons > .register-button {
   background-color: #f6f6f6;
   color: #4a4a4a;
   font-family: sans-serif;
@@ -106,7 +77,7 @@ nav > .nav-buttons > .register-button {
   transition: 0.5s ease-in-out;
 }
 
-nav > .nav-buttons > .login-button {
+.navbar > .nav-buttons > .login-button {
   background-color: transparent;
   border: 2px solid #f6f6f6;
   color: #f6f6f6;
@@ -120,8 +91,8 @@ nav > .nav-buttons > .login-button {
   transition: 0.5s ease-in;
 }
 
-nav > .nav-buttons > .register-button:hover,
-nav > .nav-buttons > .login-button:hover {
+.navbar > .nav-buttons > .register-button:hover,
+.navbar > .nav-buttons > .login-button:hover {
   animation: button-animation 0.5s ease-in;
 }
 
@@ -147,6 +118,7 @@ nav > .nav-buttons > .login-button:hover {
   margin-top: 22px;
   margin-bottom: 20px;
 }
+
 .content .heading {
   margin-bottom: 30px;
   display: flex;
@@ -230,14 +202,12 @@ nav > .nav-buttons > .login-button:hover {
   transform-style: preserve-3d;
 }
 
-/* This is a check */
 .flip-card.login {
   transform: rotateY(180deg);
 }
 .authentication-page .flip-card .flip-card-back {
   transform: rotateY(180deg);
 }
-/* This is a check */
 
 .flip-card-front .input-fields {
   width: 100%;
@@ -249,7 +219,6 @@ nav > .nav-buttons > .login-button:hover {
   flex-direction: column;
 }
 
-/* will be different */
 .flip-card-back .input-fields {
   width: 100%;
   margin-top: 62px;
@@ -364,4 +333,115 @@ nav > .nav-buttons > .login-button:hover {
   text-decoration: underline;
   color: #00bfbf;
   text-underline-offset: 3px;
+}
+
+/* toast */
+.toast {
+  animation: toast 3s;
+}
+
+@keyframes toast {
+  0% {
+    opacity: 0;
+    display: none;
+  }
+  1% {
+    opacity: 1;
+    transform: scale(1);
+    display: flex;
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+    display: flex;
+  }
+  80% {
+    opacity: 0;
+    display: flex;
+  }
+  100% {
+    opacity: 0;
+    display: none;
+  }
+}
+
+/* home-page */
+.floating-nav {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  background-color: #00bfbf;
+  height: 80px;
+  width: 90%;
+  max-width: 500px;
+  margin-top: 16px;
+  border-radius: 13px;
+  box-shadow: 3px 3px 8px #787878;
+}
+
+.icons {
+  background-color: transparent;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.icon {
+  z-index: 20;
+}
+
+.icon,
+.home-icon,
+.account-icon,
+.settings-icon {
+  background-color: transparent;
+}
+
+.icon svg {
+  width: 36px;
+  height: 36px;
+}
+
+/* svgs */
+.icons .icon:nth-child(1).active .home-icon path {
+  stroke: #00bfbf;
+}
+
+.icons .icon:nth-child(3).active .settings-icon path,
+.icons .icon:nth-child(3).active .settings-icon circle {
+  stroke: #00bfbf;
+}
+
+.icons .icon:nth-child(2).active .account-icon {
+  fill: #00bfbf;
+  stroke: #00bfbf;
+}
+/* svgs */
+
+.indicator {
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  border-radius: 50%;
+  background-color: #f6f6f6;
+  top: 50%;
+  left: -100px;
+  transform: translate(-50%, -50%);
+  z-index: 15;
+  transition: 0.5s;
+}
+
+.icons .icon:nth-child(1).active ~ .indicator {
+  left: calc(25% - 10px);
+}
+
+.icons .icon:nth-child(2).active ~ .indicator {
+  left: calc(50%);
+}
+
+.icons .icon:nth-child(3).active ~ .indicator {
+  left: calc(75% + 8px);
 }
