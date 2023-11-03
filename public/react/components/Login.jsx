@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import apiURL from "../utils/api";
 import Toast from "./Toast";
 import axios from "axios";
+import AuthContext from "../context/AuthContext";
 
 const Login = (props) => {
+  const { setAuthUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const { setIsLogin } = props;
   const baseUrl = apiURL;
@@ -29,6 +31,7 @@ const Login = (props) => {
       const res = await axios.post(loginUrl, user);
       if (res.status === 200) {
         setIsSuccess(true);
+        setAuthUser(res.data);
         setTimeout(() => {
           navigate("/me");
         }, 3000);

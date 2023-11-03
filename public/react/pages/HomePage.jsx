@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import FloatingNavBar from "../components/FloatingNavVar";
+import FloatingNavBar from "../components/FloatingNavBar";
+import BlurBackground from "../components/BlurBackground";
 import { Outlet, useLocation } from "react-router-dom";
 
 function HomePage() {
@@ -7,6 +8,7 @@ function HomePage() {
   return (
     <>
       <FloatingNavBar currentLocation={loaction} />
+      <BlurBackground />
       <Outlet />
     </>
   );
