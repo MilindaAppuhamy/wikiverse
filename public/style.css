@@ -367,7 +367,7 @@ main {
 
 /* home-page */
 .floating-nav {
-  position: absolute;
+  position: fixed;
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
@@ -431,17 +431,21 @@ main {
   left: -100px;
   transform: translate(-50%, -50%);
   z-index: 15;
+  display: none;
   transition: 0.5s;
 }
 
 .icons .icon:nth-child(1).active ~ .indicator {
+  display: block;
   left: calc(25% - 10px);
 }
 
 .icons .icon:nth-child(2).active ~ .indicator {
+  display: block;
   left: calc(50%);
 }
 
 .icons .icon:nth-child(3).active ~ .indicator {
+  display: block;
   left: calc(75% + 8px);
 }
