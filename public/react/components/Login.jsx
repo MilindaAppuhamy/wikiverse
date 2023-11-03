@@ -30,7 +30,7 @@ const Login = (props) => {
       if (res.status === 200) {
         setIsSuccess(true);
         setTimeout(() => {
-          navigate("/home");
+          navigate("/me");
         }, 3000);
       }
     } catch (error) {

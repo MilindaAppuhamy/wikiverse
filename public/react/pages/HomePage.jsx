@@ -1,9 +1,13 @@
 import React, { useState } from "react";
+import FloatingNavBar from "../components/FloatingNavVar";
+import { Outlet, useLocation } from "react-router-dom";
 
 function HomePage() {
+  const loaction = useLocation();
   return (
     <>
-      <h1>HomePage</h1>
+      <FloatingNavBar currentLocation={loaction} />
+      <Outlet />
     </>
   );
 }
