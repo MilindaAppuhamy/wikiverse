@@ -9,9 +9,9 @@ import SettingsPage from "../pages/SettingsPage";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Outlet />,
+    element: <HomePage />, //<Outlet />,
     children: [
-      { index: true, element: <LandingPage /> },
+      { index: true, element: <AccountPage /> }, //<LandingPage />
       { path: "authenticate", element: <AuthenticationPage /> },
       {
         path: "me",

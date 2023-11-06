@@ -17,19 +17,24 @@ router.get("/", async (req, res, next) => {
 // POST /wiki
 router.post("/", async (req, res, next) => {
   try {
-    const [user, wasCreated] = await User.findOrCreate({
+    const user = await User.findOne({
       where: {
-        name: req.body.name,
-        email: req.body.email,
+        id: req.body.user.id,
+        email: req.body.user.email,
       },
     });
 
-    const page = await Page.create(req.body);
+    const page = await Page.create({
+      title: req.body.post.title,
+      slug: req.body.post.slug,
+      content: req.body.post.content,
+      status: req.body.post.status,
+    });
 
     await page.setAuthor(user);
 
-    if (req.body.tags) {
-      const tagArray = req.body.tags.split(" ");
+    if (req.body.post.tags) {
+      const tagArray = req.body.post.tags.split(" ");
       const tags = [];
       for (let tagName of tagArray) {
         const [tag, wasCreated] = await Tag.findOrCreate({
@@ -107,7 +112,7 @@ router.delete("/:slug", async (req, res, next) => {
 });
 
 // GET /wiki/:slug
-router.get("/:slug", async (req, res, next) => {
+router.get("/bySlug/:slug", async (req, res, next) => {
   try {
     const page = await Page.findOne({
       where: {
@@ -135,7 +140,7 @@ router.get("/:slug", async (req, res, next) => {
 });
 
 // GET /wiki/:slug/similar
-router.get("/:slug/similar", async (req, res, next) => {
+router.get("/bySlug/:slug/similar", async (req, res, next) => {
   try {
     const page = await Page.findOne({
       where: {
@@ -146,6 +151,21 @@ router.get("/:slug/similar", async (req, res, next) => {
     const tagNames = page.tags.map((tag) => tag.name);
     const similars = await page.findSimilar(tagNames);
     res.send(similars);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// GET /wiki/byAuthor/:authorId
+router.get("/byAuthor/:authorId", async (req, res, next) => {
+  try {
+    const pages = await Page.findAll({
+      where: {
+        authorId: req.params.authorId,
+      },
+      include: [{ model: Tag }, { model: User, as: "author" }],
+    });
+    res.send(pages);
   } catch (error) {
     next(error);
   }

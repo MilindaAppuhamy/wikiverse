@@ -7,7 +7,6 @@ function SettingsPage() {
   return (
     <>
       <div
-        className="articles-container"
         style={{
           position: "absolute",
           paddingTop: "180px",
