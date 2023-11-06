@@ -449,3 +449,38 @@ main {
   display: block;
   left: calc(75% + 8px);
 }
+
+/* settings page */
+.logout-button {
+  background-color: transparent;
+  border: 2px solid #00bfbf;
+  color: #00bfbf;
+  font-size: 16px;
+  font-weight: bold;
+  width: 180px;
+  height: 45px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-left: 5px;
+  transition: 0.5s ease-in;
+}
+
+.delete-account-button {
+  background-color: #ff4646;
+  color: #ffffff;
+  font-family: sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  width: 180px;
+  height: 45px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-right: 5px;
+  transition: 0.5s ease-in-out;
+}
+
+.logout-button:hover,
+.delete-account-button:hover {
+  animation: button-animation 0.5s ease-in;
+}
