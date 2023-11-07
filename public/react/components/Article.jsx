@@ -3,7 +3,7 @@ import React from "react";
 
 const Article = (props) => {
   const { article } = props;
-  const formattedDate = moment(article.createdAt).format("ddd Do MMM YYYY");
+  const formattedDate = moment(article?.createdAt).format("ddd Do MMM YYYY");
   return (
     <div
       className="article-container"
@@ -28,7 +28,7 @@ const Article = (props) => {
           color: "#4a4a4a",
         }}
       >
-        {article.title}
+        {article?.title}
       </div>
 
       <div
@@ -53,7 +53,7 @@ const Article = (props) => {
             color: "#4a4a4a",
           }}
         >
-          {article.author.name}
+          {article?.author?.name}
         </div>
         <div
           className="article-published"
@@ -86,7 +86,7 @@ const Article = (props) => {
             color: "#4a4a4a",
           }}
         >
-          {article.content}
+          {article?.content}
         </p>
       </div>
 

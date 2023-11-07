@@ -12,26 +12,26 @@ function AccountPage() {
   const [loading, setLoading] = useState(false);
   const requestUrl = `${apiURL}/wiki/byAuthor/${authUser.id}`;
 
-  useEffect(() => {
-    const getArticles = async () => {
-      try {
-        setLoading(true);
-        const res = await axios.get(requestUrl);
-        setMyArticles(res.data);
-        setLoading(false);
-      } catch (e) {
-        console.log("error", e);
-        setLoading(false);
-      }
-    };
+  const getArticles = async () => {
+    try {
+      setLoading(true);
+      const res = await axios.get(requestUrl);
+      setMyArticles(res.data);
+      setLoading(false);
+    } catch (e) {
+      console.log("error", e);
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     getArticles();
   }, []);
 
   return (
     <>
       {loading ? <Loading /> : <></>}
-      <AddPost />
+      <AddPost getArticles={getArticles} />
       <div
         style={{
           position: "absolute",

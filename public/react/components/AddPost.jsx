@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import apiURL from "../utils/api";
 import axios from "axios";
+import AuthContext from "../context/AuthContext";
 
-function AddPost() {
+function AddPost(props) {
+  const { getArticles } = props;
+  const { authUser } = useContext(AuthContext);
   const requestUrl = `${apiURL}/wiki`;
   const [isOpen, setIsOpen] = useState(false);
   const [post, setPost] = useState({
     user: {
-      id: "",
-      email: "",
+      id: authUser.id,
+      email: authUser.email,
     },
     post: {
       title: "",
@@ -19,15 +22,44 @@ function AddPost() {
     },
   });
 
+  const handleInputChange = (e) => {
+    setPost((prev) => {
+      const userData = prev.user;
+      const postData = prev.post;
+
+      return {
+        user: { ...userData },
+        post: {
+          ...postData,
+          [e.target.name]: e.target.value,
+        },
+      };
+    });
+  };
+
   const handleAddPost = async (e) => {
     e.preventDefault();
     try {
       const res = await axios.post(requestUrl, post);
-      console.log(res);
+      setPost({
+        user: {
+          id: authUser.id,
+          email: authUser.email,
+        },
+        post: {
+          title: "",
+          slug: "",
+          content: "",
+          status: "",
+          tags: [],
+        },
+      });
+      setIsOpen(false);
     } catch (err) {
       console.log(err);
     }
-    //refetch
+    //refetch the updated data
+    getArticles();
   };
 
   return (
@@ -124,6 +156,8 @@ function AddPost() {
                   placeholder="Title"
                   required
                   style={{ zIndex: 0 }}
+                  name="title"
+                  onChange={(e) => handleInputChange(e)}
                 />
               </div>
               <div className="add-post-form-input">
@@ -133,6 +167,8 @@ function AddPost() {
                   placeholder="Slug"
                   required
                   style={{ zIndex: 0 }}
+                  name="slug"
+                  onChange={(e) => handleInputChange(e)}
                 />
               </div>
               <div className="add-post-form-input">
@@ -142,6 +178,8 @@ function AddPost() {
                   placeholder="Status"
                   required
                   style={{ zIndex: 0 }}
+                  name="status"
+                  onChange={(e) => handleInputChange(e)}
                 />
               </div>
               <div className="add-post-form-input">
@@ -151,6 +189,8 @@ function AddPost() {
                   draggable={false}
                   placeholder="Content"
                   style={{ zIndex: 1, resize: "none" }}
+                  name="content"
+                  onChange={(e) => handleInputChange(e)}
                 ></textarea>
               </div>
               <div className="add-post-form-input">
@@ -159,6 +199,8 @@ function AddPost() {
                   rows="5"
                   placeholder="Tags"
                   style={{ zIndex: 1, resize: "none" }}
+                  name="tags"
+                  onChange={(e) => handleInputChange(e)}
                 ></textarea>
               </div>
               <button
