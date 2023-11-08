@@ -30,39 +30,59 @@ function AccountPage() {
 
   return (
     <>
-      {loading ? <Loading /> : <></>}
+      {loading && <Loading />}
       <AddPost getArticles={getArticles} />
-      <div
-        style={{
-          position: "absolute",
-          paddingTop: "220px",
-          width: "100%",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        {!loading ? (
-          myArticles.length === 0 ? (
-            <h1
+
+      <>
+        {!loading &&
+          (myArticles.length === 0 ? (
+            <div
               style={{
-                fontFamily: "sans-serif",
-                fontSize: "26px",
-                textAlign: "center",
-                color: "#4a4a4a",
-                fontWeight: "normal",
-                marginTop: "100px",
+                position: "absolute",
+                marginTop: "220px",
+                width: "100%",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                backgroundColor: "transparent",
+                zIndex: 20,
               }}
             >
-              You have no published articles.
-            </h1>
+              <h1
+                style={{
+                  fontFamily: "sans-serif",
+                  fontSize: "26px",
+                  textAlign: "center",
+                  color: "#4a4a4a",
+                  fontWeight: "normal",
+                  marginTop: "100px",
+                }}
+              >
+                You have no published articles.
+              </h1>
+            </div>
           ) : (
-            myArticles.map((article) => <MyArticle article={article} />)
-          )
-        ) : (
-          <></>
-        )}
-      </div>
+            <>
+              <div style={{ paddingTop: "250px" }}></div>
+              {myArticles.map((article) => (
+                <>
+                  <div
+                    className="my-articles-container"
+                    style={{
+                      width: "100%",
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      backgroundColor: "transparent",
+                    }}
+                  >
+                    <MyArticle article={article} getArticles={getArticles} />
+                  </div>
+                </>
+              ))}
+            </>
+          ))}
+      </>
     </>
   );
 }

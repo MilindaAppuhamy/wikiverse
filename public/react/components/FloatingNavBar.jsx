@@ -7,7 +7,7 @@ function FloatingNavBar(props) {
 
   return (
     <>
-      <nav className="floating-nav">
+      <nav className="floating-nav" style={{ zIndex: 20 }}>
         <section className="icons">
           <span
             className={

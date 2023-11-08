@@ -506,7 +506,9 @@ main {
   cursor: pointer;
   transition: 0.5s ease-in-out;
 }
-.add-post-button:hover {
+.add-post-button:hover,
+.edit-button:hover,
+.delete-button:hover {
   animation: button-animation 0.5s ease-in;
 }
 .add-post-form-input {

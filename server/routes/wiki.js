@@ -65,12 +65,12 @@ router.get("/search", async (req, res, next) => {
   }
 });
 
-// PUT /wiki/:slug
-router.put("/:slug", async (req, res, next) => {
+// PUT /wiki/:id
+router.put("/:id", async (req, res, next) => {
   try {
     const [updatedRowCount, updatedPages] = await Page.update(req.body, {
       where: {
-        slug: req.params.slug,
+        id: req.params.id,
       },
       returning: true,
     });
@@ -95,12 +95,12 @@ router.put("/:slug", async (req, res, next) => {
   }
 });
 
-// DELETE /wiki/:slug
-router.delete("/:slug", async (req, res, next) => {
+// DELETE /wiki/:id
+router.delete("/:id", async (req, res, next) => {
   try {
     await Page.destroy({
       where: {
-        slug: req.params.slug,
+        id: req.params.id,
       },
     });
 

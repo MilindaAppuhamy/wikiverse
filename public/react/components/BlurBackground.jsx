@@ -15,7 +15,7 @@ const BlurBackground = () => {
         backdropFilter: "blur(7px)",
         WebkitBackdropFilter: "blur(7px)",
         borderBottom: "1px solid rgba(255,255,255,0.18)",
-        zIndex: 5,
+        zIndex: 15,
       }}
     ></div>
   );
