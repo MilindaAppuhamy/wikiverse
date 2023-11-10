@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import Register from "../components/Register";
 import Login from "../components/Login";
+import FlipcardContext from "../context/FlipcardContext";
 
 const AuthenticationPage = () => {
-  const [isLogin, setIsLogin] = useState(false);
+  const { isLogin, setIsLogin } = useContext(FlipcardContext);
 
   return (
     <main className="authentication-page" id="/authenticate">

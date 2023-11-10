@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import FlipcardContext from "../context/FlipcardContext";
 
 const LandingPage = () => {
   const navigate = useNavigate();
+  const { setIsLogin } = useContext(FlipcardContext);
+
   return (
     <main className="landing-page">
       <div className="blob"></div>
@@ -11,13 +14,19 @@ const LandingPage = () => {
         <section className="nav-buttons">
           <button
             className="register-button"
-            onClick={() => navigate("/authenticate")}
+            onClick={() => {
+              setIsLogin(false);
+              navigate("/authenticate");
+            }}
           >
             Register
           </button>
           <button
             className="login-button"
-            onClick={() => navigate("/authenticate")}
+            onClick={() => {
+              setIsLogin(true);
+              navigate("/authenticate");
+            }}
           >
             Login
           </button>
