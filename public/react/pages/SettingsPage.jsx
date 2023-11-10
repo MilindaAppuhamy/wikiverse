@@ -1,8 +1,32 @@
 import React, { useContext, useEffect, useState } from "react";
 import AuthContext from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
+import apiURL from "../utils/api";
+import axios from "axios";
 
 function SettingsPage() {
-  const { authUser } = useContext(AuthContext);
+  const { authUser, setAuthUser } = useContext(AuthContext);
+  const baseUrl = apiURL;
+  const requestUrl = `${baseUrl}/users/${authUser.id}`;
+  const navigate = useNavigate();
+
+  function handleLogout() {
+    setAuthUser({});
+    navigate("/");
+    return;
+  }
+
+  async function handleDeleteAccount() {
+    try {
+      await axios.delete(requestUrl);
+      setAuthUser({});
+      navigate("/");
+      return;
+    } catch (err) {
+      console.log("Error", err);
+    }
+  }
+
   return (
     <>
       <div
@@ -132,8 +156,15 @@ function SettingsPage() {
               alignItems: "center",
             }}
           >
-            <button className="logout-button">Logout</button>
-            <button className="delete-account-button">Delete account</button>
+            <button className="logout-button" onClick={handleLogout}>
+              Logout
+            </button>
+            <button
+              className="delete-account-button"
+              onClick={handleDeleteAccount}
+            >
+              Delete account
+            </button>
           </div>
         </div>
       </div>

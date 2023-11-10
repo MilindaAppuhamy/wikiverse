@@ -72,4 +72,19 @@ router.post("/register", async (req, res, next) => {
   }
 });
 
+router.delete("/:userId", async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.params.userId);
+    if (!user) {
+      res.status(404);
+      next();
+    } else {
+      await user.destroy();
+      return res.send(user);
+    }
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;

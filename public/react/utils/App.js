@@ -4,7 +4,7 @@ import router from "./router";
 import AuthContext from "../context/AuthContext";
 
 export const App = () => {
-  const [authUser, setAuthUser] = useState("");
+  const [authUser, setAuthUser] = useState({});
 
   return (
     <React.StrictMode>

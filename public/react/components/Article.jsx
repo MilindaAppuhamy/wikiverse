@@ -53,7 +53,9 @@ const Article = (props) => {
             color: "#4a4a4a",
           }}
         >
-          {article?.author?.name}
+          {article?.author?.name !== undefined
+            ? article?.author?.name
+            : "A former user"}
         </div>
         <div
           className="article-published"
