@@ -10,7 +10,13 @@ const MyArticle = (props) => {
 
   return (
     <>
-      {isOpen && <EditArticleForm setIsOpen={setIsOpen} article={article} />}
+      {isOpen && (
+        <EditArticleForm
+          setIsOpen={setIsOpen}
+          article={article}
+          getArticles={getArticles}
+        />
+      )}
       <div
         style={{
           width: "90%",

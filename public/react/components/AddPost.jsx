@@ -19,7 +19,7 @@ function AddPost(props) {
       slug: "",
       content: "",
       status: "",
-      tags: [],
+      tags: "",
     },
   });
 
@@ -60,7 +60,7 @@ function AddPost(props) {
       console.log(err);
     }
     //refetch the updated data
-    getArticles();
+    await getArticles();
   };
 
   return (

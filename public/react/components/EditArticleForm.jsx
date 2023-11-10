@@ -1,30 +1,36 @@
 import apiURL from "../utils/api";
 import AuthContext from "../context/AuthContext";
 import { useContext, useState } from "react";
+import axios from "axios";
 
 const EditArticleForm = (props) => {
-  const { setIsOpen, article } = props;
+  const { setIsOpen, article, getArticles } = props;
   const { authUser } = useContext(AuthContext);
   const requestUrl = `${apiURL}/wiki/${article.id}`;
+
+  //getting back tags in a string form separated with a whitespace
+  const tags = (function getTags() {
+    let tags = "";
+    for (let tag of article.tags) {
+      tags += tag.name + " ";
+    }
+    tags = tags.trim();
+    return tags;
+  })();
+
   const [post, setPost] = useState({
     user: {
       id: authUser.id,
       email: authUser.email,
     },
     post: {
-      title: "",
-      slug: "",
-      content: "",
-      status: "",
-      tags: [],
+      title: article.title,
+      slug: article.slug,
+      content: article.content,
+      status: article.status,
+      tags: tags,
     },
   });
-
-  //getting back tags in a string form separated with a whitespace
-  let tags = "";
-  for (let tag of article.tags) {
-    tags += tag.name + " ";
-  }
 
   const handleInputChange = (e) => {
     setPost((prev) => {
@@ -43,7 +49,15 @@ const EditArticleForm = (props) => {
 
   async function handleEdit(e) {
     e.preventDefault();
-    console.log("edited");
+    try {
+      const res = await axios.put(requestUrl, post);
+      setIsOpen(false);
+    } catch (err) {
+      console.log("Error", err);
+    }
+    //refetch the updated data
+    await getArticles();
+    return;
   }
 
   return (
@@ -139,7 +153,7 @@ const EditArticleForm = (props) => {
               required
               style={{ zIndex: 0 }}
               name="title"
-              value={article.title}
+              defaultValue={article.title}
               onChange={(e) => handleInputChange(e)}
             />
           </div>
@@ -151,7 +165,7 @@ const EditArticleForm = (props) => {
               required
               style={{ zIndex: 0 }}
               name="slug"
-              value={article.slug}
+              defaultValue={article.slug}
               onChange={(e) => handleInputChange(e)}
             />
           </div>
@@ -163,7 +177,7 @@ const EditArticleForm = (props) => {
               required
               style={{ zIndex: 0 }}
               name="status"
-              value={article.status}
+              defaultValue={article.status}
               onChange={(e) => handleInputChange(e)}
             />
           </div>
@@ -175,7 +189,7 @@ const EditArticleForm = (props) => {
               placeholder="Content"
               style={{ zIndex: 1, resize: "none" }}
               name="content"
-              value={article.content}
+              defaultValue={article.content}
               onChange={(e) => handleInputChange(e)}
             ></textarea>
           </div>
@@ -186,7 +200,7 @@ const EditArticleForm = (props) => {
               placeholder="Tags"
               style={{ zIndex: 1, resize: "none" }}
               name="tags"
-              value={tags}
+              defaultValue={tags}
               onChange={(e) => handleInputChange(e)}
             ></textarea>
           </div>

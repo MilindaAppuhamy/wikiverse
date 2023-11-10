@@ -8,7 +8,7 @@ const EditTools = (props) => {
   async function handleDelete() {
     try {
       const res = await axios.delete(requestUrl);
-      getArticles();
+      await getArticles();
     } catch (err) {
       console.log("Error", err);
     }

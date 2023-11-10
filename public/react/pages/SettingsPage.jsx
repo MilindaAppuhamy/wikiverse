@@ -1,9 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import AuthContext from "../context/AuthContext";
 
 function SettingsPage() {
   const { authUser } = useContext(AuthContext);
-
   return (
     <>
       <div
