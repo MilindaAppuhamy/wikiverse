@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import FlipcardContext from "../context/FlipcardContext";
+import image_1 from "../../assets/image_1.png";
+import image_2 from "../../assets/image_2.png";
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -45,8 +47,8 @@ const LandingPage = () => {
           </div>
         </section>
         <section className="images">
-          <img src="" alt="" />
-          <img src="" alt="" />
+          <img src={image_1} alt="" />
+          <img src={image_2} alt="" />
         </section>
       </section>
     </main>
