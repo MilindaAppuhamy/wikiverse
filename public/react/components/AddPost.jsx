@@ -1,12 +1,11 @@
 import React, { useContext, useState } from "react";
 import apiURL from "../utils/api";
 import axios from "axios";
-import AuthContext from "../context/AuthContext";
 import ArticleForm from "./ArticleForm";
 
 function AddPost(props) {
   const { getArticles } = props;
-  const { authUser } = useContext(AuthContext);
+  const authUser = JSON.parse(localStorage.getItem("authUser"));
   const requestUrl = `${apiURL}/wiki`;
   const [isOpen, setIsOpen] = useState(false);
   const [post, setPost] = useState({

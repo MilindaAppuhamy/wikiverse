@@ -2,11 +2,9 @@ import React, { useContext, useState } from "react";
 import apiURL from "../utils/api";
 import axios from "axios";
 import Toast from "./Toast";
-import AuthContext from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 const Register = (props) => {
-  const { setAuthUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const { setIsLogin } = props;
   const baseUrl = apiURL;
@@ -32,7 +30,8 @@ const Register = (props) => {
       const res = await axios.post(registrationUrl, user);
       if (res.status === 200) {
         setIsSuccess(true);
-        setAuthUser(res.data);
+        const authUser = res.data;
+        localStorage.setItem("authUser", JSON.stringify(authUser));
         setTimeout(() => {
           navigate("/me");
         }, 3000);

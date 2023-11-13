@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
-import AuthContext from "../context/AuthContext";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import apiURL from "../utils/api";
 import Loading from "../components/Loading";
@@ -7,7 +6,8 @@ import MyArticle from "../components/MyArticles";
 import AddPost from "../components/AddPost";
 
 function AccountPage() {
-  const { authUser } = useContext(AuthContext);
+  const authUser = JSON.parse(localStorage.getItem("authUser"));
+  console.log(authUser);
   const [myArticles, setMyArticles] = useState([]);
   const [loading, setLoading] = useState(false);
   const requestUrl = `${apiURL}/wiki/byAuthor/${authUser.id}`;

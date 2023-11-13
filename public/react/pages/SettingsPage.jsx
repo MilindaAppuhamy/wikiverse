@@ -1,17 +1,16 @@
-import React, { useContext, useEffect, useState } from "react";
-import AuthContext from "../context/AuthContext";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import apiURL from "../utils/api";
 import axios from "axios";
 
 function SettingsPage() {
-  const { authUser, setAuthUser } = useContext(AuthContext);
+  const authUser = JSON.parse(localStorage.getItem("authUser"));
   const baseUrl = apiURL;
   const requestUrl = `${baseUrl}/users/${authUser.id}`;
   const navigate = useNavigate();
 
   function handleLogout() {
-    setAuthUser({});
+    localStorage.removeItem("authUser");
     navigate("/");
     return;
   }
@@ -19,7 +18,7 @@ function SettingsPage() {
   async function handleDeleteAccount() {
     try {
       await axios.delete(requestUrl);
-      setAuthUser({});
+      localStorage.removeItem("authUser");
       navigate("/");
       return;
     } catch (err) {

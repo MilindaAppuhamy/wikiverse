@@ -1,11 +1,10 @@
 import apiURL from "../utils/api";
-import AuthContext from "../context/AuthContext";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 
 const EditArticleForm = (props) => {
   const { setIsOpen, article, getArticles } = props;
-  const { authUser } = useContext(AuthContext);
+  const authUser = JSON.parse(localStorage.getItem("authUser"));
   const requestUrl = `${apiURL}/wiki/${article.id}`;
 
   //getting back tags in a string form separated with a whitespace
