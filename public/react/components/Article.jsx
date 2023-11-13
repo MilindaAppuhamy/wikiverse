@@ -98,6 +98,7 @@ const Article = (props) => {
           backgroundColor: "transparent",
           padding: "8px",
           display: "flex",
+          flexWrap: "wrap",
           gap: "12px",
         }}
       >
