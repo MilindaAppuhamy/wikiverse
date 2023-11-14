@@ -102,8 +102,9 @@ const Article = (props) => {
           gap: "12px",
         }}
       >
-        {article.tags.map((tag) => (
+        {article.tags.map((tag, index) => (
           <p
+            key={index}
             style={{
               backgroundColor: "transparent",
               fontFamily: "sans-serif",
